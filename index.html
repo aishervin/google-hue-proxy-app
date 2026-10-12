@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google RGB Hue Overlay Proxy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000;
+        }
+        .iframe-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+        .rgb-hue-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999999;
+            pointer-events: none;
+            background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff, #ff00ff, #ff0000);
+            background-size: 400% 400%;
+            opacity: 0.5;
+            mix-blend-mode: color;
+            animation: hueShift 6s linear infinite, bgGradient 10s ease infinite;
+        }
+        @keyframes hueShift {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+        @keyframes bgGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="iframe-container">
+        <iframe src="https://corsproxy.io/?https://www.google.com" title="Google Search Proxy" allow="geolocation; microphone; camera"></iframe>
+        <div class="rgb-hue-overlay"></div>
+    </div>
+</body>
+</html>
